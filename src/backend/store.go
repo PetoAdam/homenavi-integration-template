@@ -1,5 +1,4 @@
 package backend
-package backend
 
 import "sync"
 
