@@ -92,6 +92,34 @@ UI preview during dev:
 
 If the port changed (free-port auto-pick), use the exact URL printed by the dev server.
 
+## Local build + run with Homenavi stack
+
+Use this to test the integration through integration-proxy with local assets:
+
+```bash
+cd src/frontend
+npm install
+npm run build
+
+cd ../..
+docker build -t homenavi-integration:local .
+
+docker run --rm -d \
+	--name hello-homenavi \
+	--network homenavi-network \
+	homenavi-integration:local
+```
+
+Ensure the Homenavi integrations list includes:
+
+```yaml
+integrations:
+  - id: hello-homenavi
+    upstream: http://hello-homenavi:8099
+```
+
+Then use Admin → Integrations → “Refresh integrations” to reload the proxy registry.
+
 ## Local dev flow (backend + frontend)
 
 1) Run the Go backend (serves manifest + APIs + built assets):
