@@ -34,6 +34,9 @@ web/
 	assets/      # static assets (icons, etc.)
 	ui/          # build output for /ui
 	widgets/     # build output for /widgets/<id>
+marketplace/
+	metadata.json # marketplace listing metadata
+	assets/       # marketplace assets (icon, screenshots)
 ```
 
 **Rule of thumb:** edit code under `src/` and treat `web/` as build output/static assets.
@@ -120,6 +123,15 @@ integrations:
 
 Then use Admin → Integrations → “Refresh integrations” to reload the proxy registry.
 
+## Marketplace metadata
+
+Marketplace-specific metadata and assets live in:
+
+- `marketplace/metadata.json`
+- `marketplace/assets/`
+
+Update the icon and images there to control how the integration appears in the marketplace.
+
 ## Local dev flow (backend + frontend)
 
 1) Run the Go backend (serves manifest + APIs + built assets):
@@ -187,6 +199,26 @@ Then configure the integration proxy to reach it via container DNS:
 integrations:
 	- id: hello-homenavi
 		upstream: http://hello-homenavi:8099
+
+## Docker Compose (integration-proxy install)
+
+This uses the production image and matches how the marketplace installs it:
+
+```bash
+INTEGRATIONS_ROOT=/path/to/homenavi \
+  docker compose -f compose/docker-compose.integration.yml up -d
+```
+
+Set `HN_VERSION=vX.Y.Z` to pin a release tag.
+
+## Docker Compose (local dev image)
+
+Use this to build and run your local image against a running Homenavi stack:
+
+```bash
+HOMENAVI_ROOT=/path/to/homenavi \
+  docker compose -f compose/docker-compose.dev.yml up --build
+```
 ```
 
 ## Integration proxy installation (recommended)

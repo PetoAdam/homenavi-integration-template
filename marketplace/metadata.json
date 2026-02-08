@@ -1,0 +1,17 @@
+{
+  "id": "integration-template",
+  "name": "Integration Template",
+  "description": "Starter scaffold for new HomeNavi integrations.",
+  "publisher": "HomeNavi",
+  "homepage": "https://github.com/petoadam/homenavi-integration-template",
+  "repo_url": "https://github.com/petoadam/homenavi-integration-template",
+  "listen_path": "/integrations/hello-homenavi",
+  "compose_file": "compose/docker-compose.integration.yml",
+  "image": "ghcr.io/petoadam/homenavi-integration-template",
+  "assets": {
+    "icon": "marketplace/assets/icon.svg"
+  },
+  "images": [
+    "marketplace/assets/hero.svg"
+  ]
+}
