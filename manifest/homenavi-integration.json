@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "hello-homenavi",
   "name": "Hello Homenavi",
-  "version": "0.1.0",
+  "version": "0.2.15",
   "publisher": "Example",
   "homepage": "https://homenavi.org",
   "verified": false,
