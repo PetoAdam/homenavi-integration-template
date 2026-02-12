@@ -132,6 +132,11 @@ Marketplace-specific metadata and assets live in:
 
 Update the icon and images there to control how the integration appears in the marketplace.
 
+Marketplace installs also need a Compose definition. Keep the production Compose file in
+`compose/docker-compose.integration.yml` and reference it in `marketplace/metadata.json`
+as `compose_file`. The release action embeds the Compose YAML into the marketplace payload
+so HomeNavi can install and start the service.
+
 ## Local dev flow (backend + frontend)
 
 1) Run the Go backend (serves manifest + APIs + built assets):
