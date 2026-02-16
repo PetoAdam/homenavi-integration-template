@@ -12,6 +12,13 @@ It implements:
 - A manifest schema validator (`cmd/validate-manifest`)
 - A GitHub Actions “verification” workflow (tests + gosec + manifest validation + docker build)
 
+## Release security gates
+
+- `verify.yml` is the main gate (manifest/structure checks, tests, `go vet`, `gosec`, Docker build, and Trivy scan).
+- `release.yml` runs `verify.yml` as a required stage, so publish only proceeds after verification passes.
+- The shared `PetoAdam/homenavi/.github/actions/integration-release@main` action also enforces central verification (`integration-verify` + `go vet` + `gosec`) during release.
+- Release emits SBOM + provenance and signs published image digests keylessly with Cosign.
+
 ## Secrets declaration (admin-managed)
 
 Integrations should declare required secrets in the manifest so the Homenavi Admin → Integrations page can render editable fields:
