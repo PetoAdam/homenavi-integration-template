@@ -6,14 +6,17 @@
   "publisher": "Example",
   "homepage": "https://homenavi.org",
   "verified": false,
-  "secrets": [
-    { "key": "EXAMPLE_API_KEY", "description": "API key for the integration." }
-  ],
   "ui": {
     "sidebar": {
       "enabled": true,
       "path": "/ui/",
       "label": "Hello",
+      "icon": "/assets/icon.svg"
+    },
+    "setup": {
+      "enabled": true,
+      "path": "/ui/setup/",
+      "label": "Setup",
       "icon": "/assets/icon.svg"
     }
   },

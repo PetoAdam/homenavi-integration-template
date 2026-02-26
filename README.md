@@ -19,17 +19,18 @@ It implements:
 - The shared `PetoAdam/homenavi/.github/actions/integration-release@main` action also enforces central verification (`integration-verify` + `go vet` + `gosec`) during release.
 - Release emits SBOM + provenance and signs published image digests keylessly with Cosign.
 
-## Secrets declaration (admin-managed)
+## Setup-first default (admin-managed)
 
-Integrations should declare required secrets in the manifest so the Homenavi Admin → Integrations page can render editable fields:
+This template defaults to a dedicated setup UI flow via manifest `ui.setup`:
 
 ```json
-"secrets": ["EXAMPLE_API_KEY", "EXAMPLE_API_SECRET"]
+"ui": {
+	"sidebar": { "enabled": true, "path": "/ui/" },
+	"setup": { "enabled": true, "path": "/ui/setup/" }
+}
 ```
 
-Values are sent to the integration via write-only fields and can be stored locally by the integration itself.
-
-This template exposes a write-only admin endpoint at `GET/PUT /api/admin/secrets` (admin-only; values are never returned). It stores secrets in `config/integration.secrets.json` by default (configurable via `INTEGRATION_SECRETS_PATH`). For admin access, mount the Homenavi JWT public key and set `JWT_PUBLIC_KEY_PATH` in the integration container.
+The backend exposes `GET/PUT /api/admin/setup` (admin-only) and stores setup values in `config/integration.setup.json` by default (configurable via `INTEGRATION_SETUP_PATH`). For admin access, mount the Homenavi JWT public key and set `JWT_PUBLIC_KEY_PATH` in the integration container.
 
 ## Project layout (clean & minimal)
 
@@ -74,9 +75,10 @@ Then open:
 
 ## Frontend dev (React)
 
-This template uses one React codebase to build **two entrypoints**:
+This template uses one React codebase to build **three entrypoints**:
 
 - Tab UI → `web/ui/` (served at `/ui/`)
+- Setup UI → `web/ui/setup/` (served at `/ui/setup/`)
 - Widget UI → `web/widgets/hello/` (served at `/widgets/hello/`)
 
 Commands (from `src/frontend`):
@@ -91,13 +93,17 @@ npm run dev:tab
 # dev server for widget
 npm run dev:widget
 
-# produce production assets into web/ui + web/widgets/hello
+# dev server for setup
+npm run dev:setup
+
+# produce production assets into web/ui + web/ui/setup + web/widgets/hello
 npm run build
 ```
 
 UI preview during dev:
 
 - Tab dev server: http://localhost:10000/tab.html
+- Setup dev server: http://localhost:10002/setup.html
 - Widget dev server: http://localhost:10001/widget.html
 
 If the port changed (free-port auto-pick), use the exact URL printed by the dev server.

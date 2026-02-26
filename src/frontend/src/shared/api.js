@@ -30,3 +30,19 @@ export async function incrementCounter(delta = 1) {
   if (!resp.ok) throw new Error('Failed to update counter');
   return resp.json();
 }
+
+export async function fetchSetup() {
+  const resp = await fetch(buildUrl('/api/admin/setup'), { method: 'GET' });
+  if (!resp.ok) throw new Error('Failed to load setup');
+  return resp.json();
+}
+
+export async function saveSetup(settings) {
+  const resp = await fetch(buildUrl('/api/admin/setup'), {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ settings })
+  });
+  if (!resp.ok) throw new Error('Failed to save setup');
+  return resp.json();
+}

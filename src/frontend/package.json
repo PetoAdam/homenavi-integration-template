@@ -10,10 +10,13 @@
   "scripts": {
     "dev:tab": "HN_TARGET=tab vite",
     "dev:widget": "HN_TARGET=widget vite",
+    "dev:setup": "HN_TARGET=setup vite",
     "build:tab": "HN_TARGET=tab vite build",
+    "build:setup": "HN_TARGET=setup vite build",
     "build:widget": "HN_TARGET=widget vite build",
-    "build": "npm run build:tab && npm run build:widget && node ./scripts/export-build.mjs",
+    "build": "npm run build:tab && npm run build:setup && npm run build:widget && node ./scripts/export-build.mjs",
     "preview:tab": "HN_TARGET=tab vite preview",
+    "preview:setup": "HN_TARGET=setup vite preview",
     "preview:widget": "HN_TARGET=widget vite preview"
   },
   "devDependencies": {

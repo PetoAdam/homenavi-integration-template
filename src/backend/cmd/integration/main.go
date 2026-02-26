@@ -28,8 +28,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("read manifest: %v", err)
 	}
-	secretSpecs := backend.ParseSecretSpecs(manifestJSON)
-	secretStore := backend.NewSecretStore(backend.DefaultSecretsPath())
+	setupStore := backend.NewSetupStore(backend.DefaultSetupPath())
 	adminAuth, err := backend.NewAdminAuthFromEnv()
 	if err != nil {
 		log.Fatalf("load admin auth: %v", err)
@@ -48,8 +47,7 @@ func main() {
 	s := &backend.Server{
 		WebFS:        webFS,
 		ManifestJSON: manifestJSON,
-		SecretStore:  secretStore,
-		SecretSpecs:  secretSpecs,
+		SetupStore:   setupStore,
 		AdminAuth:    adminAuth,
 	}
 	h := s.Routes()

@@ -5,14 +5,18 @@ import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 import net from 'node:net';
 
-const target = process.env.HN_TARGET === 'widget' ? 'widget' : 'tab';
+const allowedTargets = new Set(['tab', 'widget', 'setup']);
+const target = allowedTargets.has(process.env.HN_TARGET) ? process.env.HN_TARGET : 'tab';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const frontendRoot = here;
 
-const inputHtml = target === 'widget'
-  ? resolve(frontendRoot, 'widget.html')
-  : resolve(frontendRoot, 'tab.html');
+const inputByTarget = {
+  tab: resolve(frontendRoot, 'tab.html'),
+  widget: resolve(frontendRoot, 'widget.html'),
+  setup: resolve(frontendRoot, 'setup.html')
+};
+const inputHtml = inputByTarget[target] || inputByTarget.tab;
 
 function isPortOpen(port) {
   return new Promise((resolve) => {
@@ -39,7 +43,7 @@ export default defineConfig(async () => {
   const envPort = Number(process.env.HN_PORT);
   const basePort = Number.isFinite(envPort) && envPort > 0
     ? envPort
-    : (target === 'widget' ? 10001 : 10000);
+    : (target === 'widget' ? 10001 : (target === 'setup' ? 10002 : 10000));
 
   const port = await findFreePort(basePort);
 

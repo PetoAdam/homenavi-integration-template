@@ -42,5 +42,6 @@ async function exportTarget(target, destDir, destIndexName) {
 
 await exportTarget('tab', p('..', '..', '..', 'web', 'ui'), 'index.html');
 await exportTarget('widget', p('..', '..', '..', 'web', 'widgets', 'hello'), 'index.html');
+await exportTarget('setup', p('..', '..', '..', 'web', 'ui', 'setup'), 'index.html');
 
-console.log('OK: exported tab -> web/ui and widget -> web/widgets/hello');
+console.log('OK: exported tab -> web/ui, setup -> web/ui/setup and widget -> web/widgets/hello');
