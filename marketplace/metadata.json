@@ -1,7 +1,7 @@
 {
   "id": "integration-template",
   "name": "Integration Template",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Starter scaffold for new HomeNavi integrations.",
   "publisher": "HomeNavi",
   "homepage": "https://github.com/petoadam/homenavi-integration-template",
@@ -10,9 +10,6 @@
   "deployment_artifacts": {
     "compose": {
       "file": "compose/docker-compose.integration.yml"
-    },
-    "helm": {
-      "chart_ref": "oci://ghcr.io/petoadam/homenavi-integration-template"
     }
   },
   "image": "ghcr.io/petoadam/homenavi-integration-template",
