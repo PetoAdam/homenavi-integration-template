@@ -6,7 +6,14 @@
   "homepage": "https://github.com/petoadam/homenavi-integration-template",
   "repo_url": "https://github.com/petoadam/homenavi-integration-template",
   "listen_path": "/integrations/hello-homenavi",
-  "compose_file": "compose/docker-compose.integration.yml",
+  "deployment_artifacts": {
+    "compose": {
+      "file": "compose/docker-compose.integration.yml"
+    },
+    "helm": {
+      "chart_ref": "oci://ghcr.io/petoadam/homenavi-integration-template"
+    }
+  },
   "image": "ghcr.io/petoadam/homenavi-integration-template",
   "assets": {
     "icon": "marketplace/assets/icon.svg"

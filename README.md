@@ -147,8 +147,10 @@ Update the icon and images there to control how the integration appears in the m
 
 Marketplace installs also need a Compose definition. Keep the production Compose file in
 `compose/docker-compose.integration.yml` and reference it in `marketplace/metadata.json`
-as `compose_file`. The release action embeds the Compose YAML into the marketplace payload
-so HomeNavi can install and start the service.
+via `deployment_artifacts.compose.file`. Optional Helm artifacts can also be declared under
+`deployment_artifacts.helm` (for example `chart_ref` and `version`). The release action embeds
+deployment artifact metadata into the marketplace payload so HomeNavi can resolve the correct
+artifact for the selected environment runtime.
 
 ## Local dev flow (backend + frontend)
 
